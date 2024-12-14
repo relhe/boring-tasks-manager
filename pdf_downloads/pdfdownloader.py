@@ -16,6 +16,20 @@ class PDFDownloader:
         ssl._create_default_https_context = ssl._create_unverified_context
 
     def download_pdf(self, url, title):
+        """
+        Downloads a PDF file from the given URL and saves it with the specified title.
+
+        Parameters:
+        url (str): The URL of the PDF file to download.
+        title (str): The title of the PDF file, used to name the downloaded file.
+
+        Returns:
+        str: A string indicating the status of the download. It can be one of the following:
+            - "Downloaded": The PDF file was successfully downloaded.
+            - "Skipped": The PDF file was not downloaded because it already exists in the download directory.
+            - "Try_again": The PDF file was not downloaded because it is not a PDF file.
+            - "Error": An error occurred while downloading the PDF file.
+        """
         file_path = os.path.join(self.download_dir, f"{title}.pdf")
         if os.path.exists(file_path):
             print(f"Skipping (already downloaded): {url}")
@@ -38,6 +52,16 @@ class PDFDownloader:
             return "Error"
 
     def search_and_download(self):
+        """
+        This function searches for free PDFs of each book in the 'books' list,
+        and attempts to download them. It also handles rate limiting and errors.
+
+        Parameters:
+        self (PDFDownloader): The instance of the PDFDownloader class.
+
+        Returns:
+        None
+        """
         for book in self.books:
             query = f"{book} free PDF"
             print(f"Searching for: {query}\n")
@@ -64,6 +88,18 @@ class PDFDownloader:
                 self.unsuccessful_books.append(book)
 
     def print_summary(self):
+        """
+        Prints a summary of the books downloaded and those that were not.
+
+        This function prints two sections: one for the books that were successfully downloaded,
+        and another for the books that were not downloaded. It includes the total count of each section.
+
+        Parameters:
+        self (PDFDownloader): The instance of the PDFDownloader class.
+
+        Returns:
+        None
+        """
         print(f"Downloaded {len(self.downloaded_books)} books:")
         for book in self.downloaded_books:
             print(book)
@@ -79,6 +115,35 @@ if __name__ == "__main__":
         "When Breath Becomes Air Paul Kalanithi",
         "Shoe Dog Phil Knight",
         "The Stranger Albert Camus",
+        "The Alchemist Paulo Coelho",
+        "The Great Gatsby F. Scott Fitzgerald",
+        "To Kill a Mockingbird Harper Lee",
+        "1984 George Orwell",
+        "Pride and Prejudice Jane Austen",
+        "The Catcher in the Rye J.D. Salinger",
+        "The Da Vinci Code Dan Brown",
+        "The Hobbit J.R.R. Tolkien",
+        "The Hunger Games Suzanne Collins",
+        "The Kite Runner Khaled Hos",
+        "The Lord of the Rings J.R.R. Tolkien",
+        "The Lovely Bones Alice Sebold",
+        "The Notebook Nicholas Sparks",
+        "The Picture of Dorian Gray Oscar Wilde",
+        "The Secret Garden Frances Hodgson Burnett",
+        "The Shining Stephen King",
+        "The Time Traveler's Wife Audrey Niffenegger",
+        "The Wizard of Oz L. Frank Baum ",
+        "The Adventures of Sherlock Holmes Arthur Conan Doyle",
+        "The Adventures of Tom Sawyer Mark Twain",
+        "The Book Thief Markus Zusak ",
+        "The Call of the Wild Jack London",
+        "The Canterbury Tales Geoffrey Chaucer",
+        "The Chronicles of Narnia C.S. Lewis",
+        "The Color Purple Alice Walker",
+        "The Count of Monte Cristo Alexandre Dumas",
+        "The Curious Incident of the Dog in the Night-Time Mark Haddon",
+        "The Divine Comedy Dante Alighieri",
+        "The Fault in Our Stars John Green",
     ]
 
     downloader = PDFDownloader(books)
