@@ -36,7 +36,7 @@ class PDFDownloader:
             return "Skipped"
 
         try:
-            response = requests.get(url, stream=True, timeout=10)
+            response = requests.get(url, stream=True, timeout=15)
             if response.headers.get("content-type", "").lower() == "application/pdf":
                 with open(file_path, "wb") as pdf_file:
                     for chunk in response.iter_content(chunk_size=1024):
@@ -82,7 +82,7 @@ class PDFDownloader:
                         self.unsuccessful_books.append(book)
                 print("\n---\n")
                 # Longer delay to avoid rate limits
-                time.sleep(random.randint(5, 15))
+                time.sleep(random.randint(10, 20))
             except Exception as e:
                 print(f"An error occurred while searching for '{book}': {e}\n")
                 self.unsuccessful_books.append(book)
@@ -146,6 +146,15 @@ if __name__ == "__main__":
         "The Fault in Our Stars John Green",
     ]
 
-    downloader = PDFDownloader(books)
+    books_list = [
+        "Millionaire from the Heart by Anne-Claire Meret",
+        "The Greatness Guide by Robin Sharma",
+        "No Excuses: The Power of Self-Discipline by Brian Tracy",
+        "The 5 Elements of Effective Thinking by Edward B. Burger and Michael Starbird",
+        "How to Change by Katy Milkman",
+        "The Art of People by Dave Kerpen"
+    ]
+
+    downloader = PDFDownloader(books_list)
     downloader.search_and_download()
     downloader.print_summary()

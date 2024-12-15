@@ -4,6 +4,7 @@ import ssl
 import requests
 import certifi
 import os
+import random
 
 # Use the certifi certificate store
 ssl._create_default_https_context = ssl.create_default_context(
@@ -89,8 +90,17 @@ books = [
     "The Tao Te Ching Lao Tzu"
 ]
 
+books_list = [
+    "Millionaire from the Heart by Anne-Claire Meret",
+    "The Greatness Guide by Robin Sharma",
+    "No Excuses: The Power of Self-Discipline by Brian Tracy",
+    "The 5 Elements of Effective Thinking by Edward B. Burger and Michael Starbird",
+    "How to Change by Katy Milkman",
+    "The Art of People by Dave Kerpen"
+]
+
 # Perform Google searches for free PDF versions
-for book in books:
+for book in books_list:
     query = f"{book} free PDF"
     print(f"Searching for: {query}\n")
 
@@ -100,6 +110,6 @@ for book in books:
             download_pdf(result, book.replace(' ', '_'))
 
         print("\n---\n")
-        time.sleep(2)  # To avoid being flagged by Google
+        time.sleep(random.randint(10, 20))
     except Exception as e:
         print(f"An error occurred while searching for '{book}': {e}\n")
