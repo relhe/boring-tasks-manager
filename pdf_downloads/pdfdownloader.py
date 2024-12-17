@@ -1,9 +1,28 @@
+########################################################################################################################
+# PDF Book Downloader Script                                                                                           #
+#                                                                                                                      #
+# This script searches for free PDF versions of books listed in `NOT_DOWNLOADED_BOOKS` from `booklist.py`.             #
+# It downloads the PDFs and stores them in a specified directory, skipping duplicates and handling errors gracefully.  #
+#                                                                                                                      #
+# Author: Renel Lherisson                                                                                              #
+# Date: 2024-12-14                                                                                                     #
+# Purpose: Automate the search and download of books in PDF format.                                                    #
+# Dependencies:                                                                                                        #
+#    - google: `pip install google`                                                                                    #
+#    - requests: `pip install requests`                                                                                #
+#    - certifi: `pip install certifi`                                                                                  #
+#    - googlesearch: `pip install google-search`                                                                       #
+#    - booklist.py: A file containing the list of pdf to download.                                                   #
+########################################################################################################################
+
 import os
 import time
 import random
 import ssl
 import requests
 from googlesearch import search
+# Import the list of books to download from your booklist.py file
+from booklist import DOWNLOADED_BOOKS, NOT_DOWNLOADED_BOOKS
 
 
 class PDFDownloader:
@@ -110,51 +129,12 @@ class PDFDownloader:
 
 
 if __name__ == "__main__":
-    books = [
-        "The Art of Laziness Library Mindset",
-        "When Breath Becomes Air Paul Kalanithi",
-        "Shoe Dog Phil Knight",
-        "The Stranger Albert Camus",
-        "The Alchemist Paulo Coelho",
-        "The Great Gatsby F. Scott Fitzgerald",
-        "To Kill a Mockingbird Harper Lee",
-        "1984 George Orwell",
-        "Pride and Prejudice Jane Austen",
-        "The Catcher in the Rye J.D. Salinger",
-        "The Da Vinci Code Dan Brown",
-        "The Hobbit J.R.R. Tolkien",
-        "The Hunger Games Suzanne Collins",
-        "The Kite Runner Khaled Hos",
-        "The Lord of the Rings J.R.R. Tolkien",
-        "The Lovely Bones Alice Sebold",
-        "The Notebook Nicholas Sparks",
-        "The Picture of Dorian Gray Oscar Wilde",
-        "The Secret Garden Frances Hodgson Burnett",
-        "The Shining Stephen King",
-        "The Time Traveler's Wife Audrey Niffenegger",
-        "The Wizard of Oz L. Frank Baum ",
-        "The Adventures of Sherlock Holmes Arthur Conan Doyle",
-        "The Adventures of Tom Sawyer Mark Twain",
-        "The Book Thief Markus Zusak ",
-        "The Call of the Wild Jack London",
-        "The Canterbury Tales Geoffrey Chaucer",
-        "The Chronicles of Narnia C.S. Lewis",
-        "The Color Purple Alice Walker",
-        "The Count of Monte Cristo Alexandre Dumas",
-        "The Curious Incident of the Dog in the Night-Time Mark Haddon",
-        "The Divine Comedy Dante Alighieri",
-        "The Fault in Our Stars John Green",
-    ]
+    """
+    Main Execution Section
 
-    books_list = [
-        "Millionaire from the Heart by Anne-Claire Meret",
-        "The Greatness Guide by Robin Sharma",
-        "No Excuses: The Power of Self-Discipline by Brian Tracy",
-        "The 5 Elements of Effective Thinking by Edward B. Burger and Michael Starbird",
-        "How to Change by Katy Milkman",
-        "The Art of People by Dave Kerpen"
-    ]
-
-    downloader = PDFDownloader(books_list)
+    This section initializes the PDFDownloader class with a list of books to download.
+    It then searches for and downloads the books, and finally prints a summary of the results.
+    """
+    downloader = PDFDownloader(NOT_DOWNLOADED_BOOKS)
     downloader.search_and_download()
     downloader.print_summary()
