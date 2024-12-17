@@ -12,17 +12,19 @@
 #    - requests: `pip install requests`                                                                                #
 #    - certifi: `pip install certifi`                                                                                  #
 #    - googlesearch: `pip install google-search`                                                                       #
-#    - booklist.py: A file containing the list of pdf to download.                                                   #
+#    - booklist.py: A file containing the list of pdf to download.                                                     #
 ########################################################################################################################
 
+from booklist import DOWNLOADED_BOOKS, NOT_DOWNLOADED_BOOKS
 import os
 import time
 import random
 import ssl
 import requests
 from googlesearch import search
-# Import the list of books to download from your booklist.py file
-from booklist import DOWNLOADED_BOOKS, NOT_DOWNLOADED_BOOKS
+import importlib
+import booklist
+importlib.reload(booklist)
 
 
 class PDFDownloader:
