@@ -170,3 +170,5 @@ cython_debug/
 */books/*
 */pdf_downloads/*
 *.DS_Store
+*/test-docs/*
+*/summary.txt
