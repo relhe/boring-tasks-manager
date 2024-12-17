@@ -172,4 +172,4 @@ cython_debug/
 *.DS_Store
 */test-docs/*
 */summary.txt
-*booklist.py
+*bookname.py

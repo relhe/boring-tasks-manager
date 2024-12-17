@@ -1,30 +1,31 @@
 ########################################################################################################################
 # PDF Book Downloader Script                                                                                           #
 #                                                                                                                      #
-# This script searches for free PDF versions of books listed in `NOT_DOWNLOADED_BOOKS` from `booklist.py`.             #
+# This script searches for PDF listed in NEW_BOOKS from `bookname.py`.                                                 #
 # It downloads the PDFs and stores them in a specified directory, skipping duplicates and handling errors gracefully.  #
 #                                                                                                                      #
 # Author: Renel Lherisson                                                                                              #
 # Date: 2024-12-14                                                                                                     #
-# Purpose: Automate the search and download of books in PDF format.                                                    #
+# Purpose: Automate the search and download PDFs.                                                    #
 # Dependencies:                                                                                                        #
 #    - google: `pip install google`                                                                                    #
 #    - requests: `pip install requests`                                                                                #
 #    - certifi: `pip install certifi`                                                                                  #
 #    - googlesearch: `pip install google-search`                                                                       #
-#    - booklist.py: A file containing the list of pdf to download.                                                     #
+#    - bookname.py: A file containing the list of pdf to download.                                                     #
 ########################################################################################################################
 
-from booklist import DOWNLOADED_BOOKS, NOT_DOWNLOADED_BOOKS
+from bookname import NEW_BOOKS
 import os
 import time
 import random
 import ssl
 import requests
 from googlesearch import search
+import booknamecleaner
 import importlib
-import booklist
-importlib.reload(booklist)
+import bookname
+importlib.reload(bookname)
 
 
 class PDFDownloader:
@@ -121,6 +122,9 @@ class PDFDownloader:
         Returns:
         None
         """
+        booknamecleaner.add_books_to_downloaded_list(self.downloaded_books)
+        booknamecleaner.add_books_to_not_downloaded_list(
+            self.unsuccessful_books)
         print(f"Downloaded {len(self.downloaded_books)} books:")
         for book in self.downloaded_books:
             print(book)
@@ -137,6 +141,6 @@ if __name__ == "__main__":
     This section initializes the PDFDownloader class with a list of books to download.
     It then searches for and downloads the books, and finally prints a summary of the results.
     """
-    downloader = PDFDownloader(NOT_DOWNLOADED_BOOKS)
+    downloader = PDFDownloader(NEW_BOOKS)
     downloader.search_and_download()
     downloader.print_summary()
