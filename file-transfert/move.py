@@ -1,6 +1,5 @@
 import argparse
 import os
-import random
 
 
 class Mover:
@@ -17,8 +16,6 @@ class Mover:
         Move files from a source directory to a destination directory.
 
         Parameters:
-        self (Mover): The instance of the Mover class.
-        destination_folder (str): The destination folder where the files will be moved.
         src_folder (str): The source folder where the files are located.
         dest_folder (str): The destination folder where the files will be moved.
         file_type (str): The file type to move.
@@ -34,7 +31,6 @@ class Mover:
             return
 
         self._collect_files()
-
         self._move_collected_files()
 
     def _validate_paths(self):
@@ -75,9 +71,6 @@ class Mover:
         """
         Print a summary of the move operation.
 
-        Parameters:
-        self (Mover): The instance of the Mover class.
-
         Returns:
         None
         """
@@ -93,14 +86,14 @@ class Mover:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Move files from a source directory to a destination directory.")
-    parser.add_argument("src_folder", type=str,
+    parser.add_argument("src", type=str,
                         help="The source folder where the files are located.")
-    parser.add_argument("dest_folder", type=str,
+    parser.add_argument("dest", type=str,
                         help="The destination folder where the files will be moved.")
-    parser.add_argument("--file_type", type=str, default="pdf",
-                        help="The file type to move. Default is 'pdf'.")
+    parser.add_argument("--type", type=str, default="pdf",
+                        help="The file type to move. Use 'all' to move all files. Default is 'pdf'.")
     args = parser.parse_args()
 
     mover = Mover("", "")
-    mover.move_files(args.src_folder, args.dest_folder, args.file_type)
+    mover.move_files(args.src, args.dest, args.type)
     mover.summary()
