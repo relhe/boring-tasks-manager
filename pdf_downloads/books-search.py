@@ -35,69 +35,9 @@ def download_pdf(url, title):
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # List of books and their authors
-books = [
-    "The Art of Laziness Library Mindset",
-    "When Breath Becomes Air Paul Kalanithi",
-    "Shoe Dog Phil Knight",
-    "The Stranger Albert Camus",
-    "How to Win Friends & Influence People Dale Carnegie",
-    "The Alchemist Paulo Coelho",
-    "Never Split the Difference Chris Voss",
-    "The Psychology of Money Morgan Housel",
-    "The Iliad Homer",
-    "The Odyssey Homer",
-    "The 48 Laws of Power Robert Greene",
-    "Rich Dad Poor Dad Robert T. Kiyosaki",
-    "Steve Jobs Walter Isaacson",
-    "The Prince Niccolò Machiavelli",
-    "The Laws of Human Nature Robert Greene",
-    "Meditations Marcus Aurelius",
-    "The Idiot Fyodor Dostoevsky",
-    "Good Vibes, Good Life Vex King",
-    "Can't Hurt Me David Goggins",
-    "Crime and Punishment Fyodor Dostoevsky",
-    "Notes from Underground Fyodor Dostoevsky",
-    "The Monk Who Sold His Ferrari Robin Sharma",
-    "The Subtle Art of Not Giving a F*ck Mark Manson",
-    "Ikigai Héctor García and Francesc Miralles",
-    "Tuesdays with Morrie Mitch Albom",
-    "The Art of War Sun Tzu",
-    "Thinking, Fast and Slow Daniel Kahneman",
-    "The War of Art Steven Pressfield",
-    "Influence: The Psychology of Persuasion Robert B. Cialdini",
-    "Man's Search for Meaning Viktor E. Frankl",
-    "The Last Lecture Randy Pausch",
-    "The Almanack of Naval Ravikant Eric Jorgenson",
-    "Tiny Habits BJ Fogg",
-    "Meditations on First Philosophy René Descartes",
-    "Nicomachean Ethics Aristotle",
-    "Siddhartha Hermann Hesse",
-    "The Courage to Be Disliked Ichiro Kishimi and Fumitake Koga",
-    "The Book of Five Rings Miyamoto Musashi",
-    "Atomic Habits James Clear",
-    "The Things You Can See Only When You Slow Down Haemin Sunim",
-    "Leonardo da Vinci Walter Isaacson",
-    "Beyond Good and Evil Friedrich Nietzsche",
-    "Thus Spoke Zarathustra Friedrich Nietzsche",
-    "White Nights Fyodor Dostoevsky",
-    "Don't Believe Everything You Think Joseph Nguyen",
-    "100 Harsh Truths of Life Library Mindset",
-    "100 Quotes That Will Change Your Life Library Mindset",
-    "On the Shortness of Life Seneca",
-    "The Power of Now Eckhart Tolle",
-    "The Courage to Be Happy Ichiro Kishimi and Fumitake Koga",
-    "Meditations (Revisited) Marcus Aurelius",
-    "The Tao Te Ching Lao Tzu"
-]
+books = []
 
-books_list = [
-    "Millionaire from the Heart by Anne-Claire Meret",
-    "The Greatness Guide by Robin Sharma",
-    "No Excuses: The Power of Self-Discipline by Brian Tracy",
-    "The 5 Elements of Effective Thinking by Edward B. Burger and Michael Starbird",
-    "How to Change by Katy Milkman",
-    "The Art of People by Dave Kerpen"
-]
+books_list = []
 
 # Perform Google searches for free PDF versions
 for book in books_list:
