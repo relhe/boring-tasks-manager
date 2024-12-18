@@ -76,7 +76,8 @@ class PDFDownloader:
     def search_and_download(self):
         """
         This function searches for free PDFs of each book in the 'books' list,
-        and attempts to download them. It also handles rate limiting and errors.
+        and attempts to download them. If the first URL does not yield a PDF file,
+        it tries additional URLs until one works or the list is exhausted.
 
         Parameters:
         self (PDFDownloader): The instance of the PDFDownloader class.
@@ -88,23 +89,28 @@ class PDFDownloader:
             query = f"{book} free PDF"
             print(f"Searching for: {query}\n")
             try:
-                for result in search(query, num=1, stop=1, pause=random.randint(5, 10)):
+                for result in search(query, num=5, stop=5, pause=random.randint(5, 10)):
                     print(f"Found: {result}")
                     feedback = self.download_pdf(
                         result, book.replace(' ', '_'))
+
                     if feedback == "Downloaded":
                         self.downloaded_books.append(book)
                         break
-                    elif feedback == "Skipped":
-                        break
-                    elif feedback == "Try_again":
-                        self.unsuccessful_books.append(book)
+                    elif feedback in ["Skipped", "Try_again"]:
+                        print(f"Skipping this URL: {result}")
                         continue
                     elif feedback == "Error":
+                        print(f"Error encountered with URL: {result}")
                         self.unsuccessful_books.append(book)
+                        break
+
+                if book not in self.downloaded_books:
+                    self.unsuccessful_books.append(book)
+
                 print("\n---\n")
-                # Longer delay to avoid rate limits
                 time.sleep(random.randint(10, 20))
+
             except Exception as e:
                 print(f"An error occurred while searching for '{book}': {e}\n")
                 self.unsuccessful_books.append(book)
