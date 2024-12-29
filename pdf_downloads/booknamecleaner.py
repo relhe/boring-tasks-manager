@@ -11,6 +11,7 @@
 ########################################################################################################################
 
 from bookname import DOWNLOADED_BOOKS, NOT_DOWNLOADED_BOOKS, NEW_BOOKS
+from books import FIFTY_BOOKS
 import os
 import importlib
 import bookname
@@ -96,5 +97,35 @@ def add_books_to_not_downloaded_list(books):
     clean_and_update_booklists()
 
 
+def remove_already_downloaded_books(books: list, path: str) -> list:
+    """
+    Checks if PDF files for the given books are already present in the "fifty-books" folder.
+    Returns a list of books that are not found as PDFs in the folder.
+    """
+
+    books_to_download = []
+
+    if not os.path.exists(path):
+        print(
+            f"Folder '{path}' does not exist.")
+        return books
+
+    downloaded_files = {file[:-4].replace("_", " ")
+                        for file in os.listdir(path) if file.endswith(".pdf")}
+
+    for book in books:
+        if book not in downloaded_files:
+            books_to_download.append(book)
+
+    return books_to_download
+
+
 if __name__ == "__main__":
-    clean_and_update_booklists()
+    path = os.path.join(os.getcwd(), "fifty-books")
+    books_to_download = remove_already_downloaded_books(FIFTY_BOOKS, path)
+    if books_to_download:
+        print("Books not found as PDFs:")
+        for book in sorted(books_to_download):
+            print(book)
+    else:
+        print("All books are already downloaded as PDFs.")
